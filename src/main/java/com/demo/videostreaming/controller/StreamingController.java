@@ -1,6 +1,7 @@
 package com.demo.videostreaming.controller;
 
 import com.demo.videostreaming.service.StreamingService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,13 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 public class StreamingController {
 
     private static final String UPLOAD_DIR="D:/Explore/UDEMY/Spring Boot WebFlux - Video Streaming/videostreaming/src/main/resources/videos/";
 
 
-    @Autowired
-    private StreamingService service;
+    private final StreamingService service;
 
     @GetMapping(value = "video/{title}", produces = "video/mp4")
     public Mono<Resource> getVideos(@PathVariable String title){
@@ -50,4 +51,8 @@ public class StreamingController {
         return "ok";
     }
 
+    @GetMapping("/helloCi")
+    public String helloCi(){
+        return "Hello CI";
+    }
 }
